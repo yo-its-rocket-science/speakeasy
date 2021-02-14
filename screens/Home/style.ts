@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: theme.colors.background,
     height: 128,
+    marginBottom: 16,
   },
   profilePic: {
     justifyContent: 'flex-start',

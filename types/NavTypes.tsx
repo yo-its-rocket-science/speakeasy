@@ -2,7 +2,7 @@ export type RootStackParamList = {
   Landing: undefined;
   Login: undefined;
   Root: undefined;
-  SignIn: undefined;
+  SignUp: undefined;
   NotFound: undefined;
 };
 

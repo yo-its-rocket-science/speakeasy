@@ -10,6 +10,7 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper";
 import { DarkTheme as NavigationDarkTheme } from "@react-navigation/native";
+import { theme } from "./theme";
 
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
@@ -24,10 +25,7 @@ export default function App() {
       <PaperProvider theme={CombinedDarkTheme}>
         <SafeAreaProvider>
           <Navigation />
-          <StatusBar
-            style="auto"
-            backgroundColor={CombinedDarkTheme.colors.background}
-          />
+          <StatusBar style="auto" backgroundColor={theme.colors.background} />
         </SafeAreaProvider>
       </PaperProvider>
     );
