@@ -12,6 +12,8 @@ import {
 import { DarkTheme as NavigationDarkTheme } from "@react-navigation/native";
 import { theme } from "./theme";
 import { RoomContextWrapper } from "./screens/Home/Room/context";
+import { StoreProvider } from "easy-peasy";
+import { store } from "./store";
 
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
@@ -23,14 +25,19 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={CombinedDarkTheme}>
-        <RoomContextWrapper>
-          <SafeAreaProvider>
-            <Navigation />
-            <StatusBar style="auto" backgroundColor={theme.colors.background} />
-          </SafeAreaProvider>
-        </RoomContextWrapper>
-      </PaperProvider>
+      <StoreProvider store={store}>
+        <PaperProvider theme={CombinedDarkTheme}>
+          <RoomContextWrapper>
+            <SafeAreaProvider>
+              <Navigation />
+              <StatusBar
+                style="auto"
+                backgroundColor={theme.colors.background}
+              />
+            </SafeAreaProvider>
+          </RoomContextWrapper>
+        </PaperProvider>
+      </StoreProvider>
     );
   }
 }

@@ -36,9 +36,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="Landing" component={LandingScreen} />
+      <Stack.Screen name="Landing" component={LandingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignIn" component={SignUpScreen} /> */}
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="Room" component={Room} />
 
