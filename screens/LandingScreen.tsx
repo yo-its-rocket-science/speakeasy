@@ -24,7 +24,7 @@ export default function LandingScreen({ navigation }: Props) {
       try {
         const user = await AsyncStorage.getItem(AsyncStoreKey.CURRENT_USER);
         if (user) {
-          // navigation.navigate("Root");
+          navigation.navigate("Root");
           setUser(JSON.parse(user) as StoreUser);
         }
       } catch (e) {
