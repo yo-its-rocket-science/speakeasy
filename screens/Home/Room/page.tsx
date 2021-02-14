@@ -1,8 +1,20 @@
 // @ts-nocheck
 
-import React, { useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { Text, TouchableOpacity, Image, View, FlatList } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  useNavigation,
+  useRoute,
+  useFocusEffect,
+} from "@react-navigation/native";
+import {
+  Text,
+  TouchableOpacity,
+  Image,
+  View,
+  FlatList,
+  BackHandler,
+} from "react-native";
+import InCallManager from "react-native-incall-manager";
 import { Appbar, Button, Card, Title } from "react-native-paper";
 import { theme } from "../../../theme";
 import { styles } from "./style";
@@ -49,6 +61,9 @@ const RoomHeader = ({ room }: { room: RoomModel }) => {
     setRemoteStream();
     setCachedRemotePC();
     setCachedLocalPC();
+
+    InCallManager.stop();
+    InCallManager.setSpeakerphoneOn(false);
   };
 
   return (
@@ -236,10 +251,25 @@ export const Room = () => {
   useEffect(() => {
     async function cb() {
       await startLocalStream();
+      InCallManager.start({ media: "audio" });
+      InCallManager.setSpeakerphoneOn(true);
     }
 
     cb();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        InCallManager.stop();
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [InCallManager])
+  );
 
   return (
     <SafeAreaView style={styles.container}>
