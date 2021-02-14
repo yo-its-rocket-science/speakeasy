@@ -239,7 +239,7 @@ export const Room = () => {
   const user = useStoreState(state => state.user);
 
   const renderItem = ({ item }: { item: User }) => <Item {...item} />;
-  const keyExtractor = ({ id }: User) => id;
+  const keyExtractor = ({ id, uid }: StoreUser) => (id ? id : uid);
 
   const startLocalStream = async () => {
     try {
