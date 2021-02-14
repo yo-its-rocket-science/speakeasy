@@ -1,6 +1,5 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-// @ts-ignore
 import { Button, TextInput } from "react-native-paper";
 import { Text, View } from "../components/Themed";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -34,7 +33,7 @@ export default function LoginScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SpeakEasy</Text>
-      <Text>{errorMessage}</Text>
+      <Text style={styles.text}>{errorMessage}</Text>
       <TextInput label="Email" style={styles.field} value={email} onChangeText={(text: string) => setEmail(text)}
                  accessibilityComponentType="" accessibilityTraits="" textContentType="emailAddress"
                  autoCompleteType="email" keyboardType="email-address" />
@@ -71,5 +70,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: "10%",
     marginBottom: "10%",
+  },
+  text: {
+    color: "white",
   },
 });

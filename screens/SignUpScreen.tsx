@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, TextInput, useTheme } from "react-native-paper";
 import { Text, View } from "../components/Themed";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
@@ -14,6 +14,7 @@ type Props = {
 };
 
 export default function SignUpScreen({ navigation }: Props) {
+    const theme = useTheme();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [repeat, setRepeat] = React.useState("");
@@ -39,7 +40,7 @@ export default function SignUpScreen({ navigation }: Props) {
     return (
       <View style={styles.container}>
           <Text style={styles.title}>Create Account</Text>
-          <Text>{errorMessage}</Text>
+          <Text style={styles.text}>{errorMessage}</Text>
           <TextInput style={styles.field}
                      label="Email"
                      value={email}
@@ -98,5 +99,8 @@ const styles = StyleSheet.create({
         width: "40%",
         marginTop: "5%",
         marginLeft: "20%",
+    },
+    text: {
+        color: "white",
     },
 });
