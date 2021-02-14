@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home } from "./page";
 import { HomeScreenParamList } from "../../types";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Room } from "./Room";
 
 const HomeStack = createStackNavigator<HomeScreenParamList>();
 export const HomeNavigator = () => {
@@ -17,8 +16,6 @@ export const HomeNavigator = () => {
           animationEnabled: true,
         }}
       />
-
-      <HomeStack.Screen name="RoomScreen" component={Room} />
     </HomeStack.Navigator>
   );
 };

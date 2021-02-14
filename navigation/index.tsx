@@ -14,6 +14,7 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import LandingScreen from "../screens/LandingScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import { Room } from "../screens/Home/Room";
 
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
@@ -35,10 +36,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Landing" component={LandingScreen} />
+      {/* <Stack.Screen name="Landing" component={LandingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignIn" component={SignUpScreen} />
+      <Stack.Screen name="SignIn" component={SignUpScreen} /> */}
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+      <Stack.Screen name="Room" component={Room} />
 
       <Stack.Screen
         name="NotFound"

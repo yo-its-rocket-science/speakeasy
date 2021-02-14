@@ -30,7 +30,7 @@ const Item = (item: Room) => {
   const onOpenRoom = () => {
     console.log({ item });
 
-    navigation.navigate("RoomScreen", { room: item });
+    navigation.navigate("Room", { room: item });
   };
 
   return (
