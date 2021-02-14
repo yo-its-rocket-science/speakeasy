@@ -18,7 +18,7 @@ export default function LoginScreen({ navigation }: Props) {
   const [password, setPassword] = React.useState("");
   const [errorMessage, setErrorMsg] = React.useState("");
 
-  function AttempSignIn() {
+  function AttemptSignIn() {
     if (email.length === 0 || password.length === 0) {
       setErrorMsg("Enter your email and password to login.");
     } else {
@@ -33,14 +33,15 @@ export default function LoginScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SpeakEasy</Text>
-      <Text>{errorMessage}</Text>
-      <TextInput label="Email" style={styles.field} value={email} onChangeText={text => setEmail(text)}
+      <Text style={styles.text}>{errorMessage}</Text>
+      <TextInput label="Email" style={styles.field} value={email} onChangeText={(text: string) => setEmail(text)}
                  accessibilityComponentType="" accessibilityTraits="" textContentType="emailAddress"
                  autoCompleteType="email" keyboardType="email-address" />
-      <TextInput label="Password" style={styles.field} value={password} onChangeText={text => setPassword(text)}
+      <TextInput label="Password" style={styles.field} value={password}
+                 onChangeText={(text: string) => setPassword(text)}
                  accessibilityComponentType="" accessibilityTraits="" secureTextEntry={true} textContentType="password"
                  autoCompleteType="password" />
-      <Button mode="contained" style={styles.button} color="black" onPress={AttempSignIn} accessibilityComponentType=""
+      <Button mode="contained" style={styles.button} color="black" onPress={AttemptSignIn} accessibilityComponentType=""
               accessibilityTraits="">Log In</Button>
     </View>
   );
@@ -69,5 +70,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: "10%",
     marginBottom: "10%",
+  },
+  text: {
+    color: "white",
   },
 });
