@@ -28,7 +28,12 @@ jobs:
       - uses: c-hive/gha-yarn-cache@v1
         
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Run yarn install
+        run: yarn install
+
+      - name: Make Gradlew Executable
+        run: cd android && chmod +x ./gradlew    
+        
+      - name: Build Android App Bundle
         run: |
-          yarn install
-          yarn react-native run-android
+         cd android && ./gradlew bundleRelease --no-daemon
