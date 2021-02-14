@@ -6,10 +6,11 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import { theme } from "../theme";
 
-type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, "Login">;
+type Login = StackNavigationProp<RootStackParamList, "Login">;
+type Signup = StackNavigationProp<RootStackParamList, "Signup">;
 
 type Props = {
-  navigation: ProfileScreenNavigationProp;
+  navigation: Login | Signup;
 };
 
 export default function LandingScreen({ navigation }: Props) {
@@ -19,7 +20,7 @@ export default function LandingScreen({ navigation }: Props) {
       <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate("Login")}
               accessibilityComponentType=""
               accessibilityTraits="">Log in</Button>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate("NotFound")}
+      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate("SignUp")}
               accessibilityComponentType=""
               accessibilityTraits="">Sign up</Button>
     </View>
