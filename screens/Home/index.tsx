@@ -5,6 +5,7 @@ import {
   Appbar,
   Button,
   Card,
+  Chip,
   Divider,
   FAB,
   Paragraph,
@@ -16,55 +17,37 @@ import {
 } from "react-native-safe-area-context";
 import { View } from "../../components/Themed";
 import { theme } from "../../theme";
+import { Room, RoomMockFactory } from "../../types";
 import { styles } from "./style";
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d73",
-    title: "Third Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d74",
-    title: "Third Item",
-  },
-];
+const DATA: Room[] = RoomMockFactory.buildList(10);
 
-const Item = ({ title }: { title: string }) => (
-  <Card accessibilityComponentType="" accessibilityTraits="">
-    <Card.Title
-      title={title}
-      subtitle="Card Subtitle"
-      accessibilityComponentType=""
-      accessibilityTraits=""
-    />
+const Item = (item: Room) => (
+  <Card
+    accessibilityComponentType=""
+    accessibilityTraits=""
+    style={styles.card}
+  >
     <Card.Content>
-      <Paragraph>Card content</Paragraph>
+      <View
+        style={{
+          backgroundColor: "#1C1C1C",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "auto",
+        }}
+      >
+        <Title>{item.name}</Title>
+        <Chip
+          accessibilityComponentType=""
+          accessibilityTraits=""
+          style={{ backgroundColor: "#ef5350" }}
+        >
+          Live
+        </Chip>
+      </View>
+      <Paragraph>{item.description}</Paragraph>
     </Card.Content>
-    <Card.Cover
-      source={{ uri: "https://picsum.photos/700" }}
-      accessibilityComponentType=""
-      accessibilityTraits=""
-    />
-    <Card.Actions>
-      <Button accessibilityComponentType="" accessibilityTraits="">
-        Cancel
-      </Button>
-      <Button accessibilityComponentType="" accessibilityTraits="">
-        Ok
-      </Button>
-    </Card.Actions>
   </Card>
 );
 
@@ -107,17 +90,17 @@ const HomeHeader = () => (
 );
 
 export const Home = () => {
-  const renderItem = ({ item }: { item: any }) => <Item title={item.title} />;
+  const renderItem = ({ item }: { item: Room }) => <Item {...item} />;
   const inset = useSafeAreaInsets();
 
-  const keyExtractor = ({ id }: { id: string }) => id;
+  const keyExtractor = ({ id }: Room) => id;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <FlatList
+          style={styles.listContainer}
           ListHeaderComponent={HomeHeader}
-          ItemSeparatorComponent={Divider}
           contentContainerStyle={{
             backgroundColor: theme.colors.background,
             paddingBottom: inset.bottom,

@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
     color: theme.colors.text,
   },
   listContainer: {
-    flex: 1,
     backgroundColor: theme.colors.background,
   },
   createRoomFab: {
@@ -33,5 +32,9 @@ export const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+  },
+  card: {
+    marginBottom: 16,
+    marginHorizontal: 8,
   }
 });
