@@ -15,7 +15,7 @@ import {
   BackHandler,
 } from "react-native";
 import InCallManager from "react-native-incall-manager";
-import { Appbar, Button, Card, Title } from "react-native-paper";
+import { Avatar, Appbar, Button, Card, Title } from "react-native-paper";
 import { theme } from "../../../theme";
 import { styles } from "./style";
 import {
@@ -27,8 +27,9 @@ import { Room as RoomModel } from "../../../types";
 import { User, UserMockFactory } from "../../../types/User";
 import { RTCPeerConnection, RTCView, mediaDevices } from "react-native-webrtc";
 import { RoomContextWrapper, useRoomContext } from "./context";
+import { StoreUser, useStoreState } from "../../../store/types";
 
-const DATA: User[] = UserMockFactory.buildList(15);
+let DATA: StoreUser[] = UserMockFactory.buildList(15);
 
 const RoomHeader = ({ room }: { room: RoomModel }) => {
   const {
@@ -100,17 +101,18 @@ const Item = (item: User) => {
       style={styles.card}
     >
       <View style={{ flexDirection: "row" }}>
-        <Image
-          width={85}
-          height={85}
-          style={styles.profilePic}
-          source={{
-            uri: item.picture,
-          }}
-        />
+        {item.picture || item.photoURL ? (
+          <Avatar.Image
+            size={65}
+            source={{ uri: item.picture }}
+            style={{ margin: 8 }}
+          />
+        ) : (
+          <Avatar.Icon size={65} icon="account" style={{ margin: 8 }} />
+        )}
 
-        <Card.Content>
-          <Title>{item.name}</Title>
+        <Card.Content style={{ justifyContent: "center" }}>
+          <Title>{item.name || item.email}</Title>
         </Card.Content>
       </View>
     </Card>
@@ -123,6 +125,7 @@ const RoomFooter = ({ room }: { room: RoomModel }) => {
     localStream,
     remoteStream,
     setRemoteStream,
+    cachedLocalPC,
     setCachedLocalPC,
     setCachedRemotePC,
   } = useRoomContext();
@@ -205,12 +208,13 @@ const RoomFooter = ({ room }: { room: RoomModel }) => {
     } catch (err) {
       console.error(err);
     }
+
     setCachedLocalPC(localPC);
     setCachedRemotePC(remotePC);
   };
 
   return (
-    <>
+    <View>
       <Button
         accessibilityComponentType=""
         accessibilityTraits=""
@@ -223,16 +227,17 @@ const RoomFooter = ({ room }: { room: RoomModel }) => {
         // this thing allows the audio
         <RTCView streamURL={remoteStream.toURL()} />
       )}
-    </>
+    </View>
   );
 };
 
 export const Room = () => {
   const { setLocalStream } = useRoomContext();
-
   const route = useRoute();
   const { room } = route?.params as RoomPageProps;
   const inset = useSafeAreaInsets();
+  const user = useStoreState(state => state.user);
+  console.log(user);
 
   const renderItem = ({ item }: { item: User }) => <Item {...item} />;
   const keyExtractor = ({ id }: User) => id;
@@ -281,7 +286,7 @@ export const Room = () => {
             backgroundColor: theme.colors.background,
             paddingBottom: inset.bottom,
           }}
-          data={DATA}
+          data={[user, ...DATA]}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
         />

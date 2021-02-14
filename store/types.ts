@@ -1,9 +1,11 @@
 import { User } from "../types/User";
 import { Action, createTypedHooks } from 'easy-peasy';
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
+export type StoreUser = User | FirebaseAuthTypes.User;
 export type StoreModel = {
-  user?: User;
-  setUser: Action<StoreModel, User>;
+  user?: StoreUser;
+  setUser: Action<StoreModel, StoreUser>;
 }
 
 const typedHooks = createTypedHooks<StoreModel>();

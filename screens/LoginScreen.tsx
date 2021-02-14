@@ -39,6 +39,8 @@ export default function LoginScreen({ navigation }: Props) {
           JSON.stringify(user)
         );
 
+        setUser(user);
+
         navigation.navigate("Root");
       } catch (e) {
         setErrorMsg(e.message);

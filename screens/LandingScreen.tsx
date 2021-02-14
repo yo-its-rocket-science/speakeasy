@@ -7,6 +7,7 @@ import { RootStackParamList } from "../types";
 import { theme } from "../theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AsyncStoreKey } from "../types/AsyncStore";
+import { StoreUser, useStoreActions } from "../store/types";
 
 type Login = StackNavigationProp<RootStackParamList, "Login">;
 type Signup = StackNavigationProp<RootStackParamList, "SignUp">;
@@ -16,14 +17,19 @@ type Props = {
 };
 
 export default function LandingScreen({ navigation }: Props) {
+  const setUser = useStoreActions(actions => actions.setUser);
+
   useEffect(() => {
     async function cb() {
       try {
         const user = await AsyncStorage.getItem(AsyncStoreKey.CURRENT_USER);
         if (user) {
           navigation.navigate("Root");
+          setUser(JSON.parse(user) as StoreUser);
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }
 
     cb();
