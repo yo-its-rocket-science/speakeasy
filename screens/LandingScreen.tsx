@@ -3,20 +3,24 @@ import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Text, View } from '../components/Themed';
 
-export default function TabOneScreen() {
+export default function LandingScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SpeakEasy</Text>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()}>Log in</Button>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()}>Sign up</Button>
+      <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()}
+              accessibilityComponentType=""
+              accessibilityTraits="">Log in</Button>
+      <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()}
+              accessibilityComponentType=""
+              accessibilityTraits="">Sign up</Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    width: '30%',
-    marginTop: '10px',
+    width: '40%',
+    marginTop: '5%',
   },
   container: {
     flex: 1,
