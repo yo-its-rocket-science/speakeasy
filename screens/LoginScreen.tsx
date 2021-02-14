@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   button: {
     width: "40%",
     marginTop: "5%",
-    marginLeft: "20%",
   },
   field: {
     width: "80%",

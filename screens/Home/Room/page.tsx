@@ -112,7 +112,7 @@ const Item = (item: User) => {
         )}
 
         <Card.Content style={{ justifyContent: "center" }}>
-          <Title>{item.name || item.email}</Title>
+          <Title>{item.name ? item.name : item.email}</Title>
         </Card.Content>
       </View>
     </Card>
@@ -237,7 +237,6 @@ export const Room = () => {
   const { room } = route?.params as RoomPageProps;
   const inset = useSafeAreaInsets();
   const user = useStoreState(state => state.user);
-  console.log(user);
 
   const renderItem = ({ item }: { item: User }) => <Item {...item} />;
   const keyExtractor = ({ id }: User) => id;

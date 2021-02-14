@@ -15,6 +15,7 @@ import LandingScreen from "../screens/LandingScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
 import { Room } from "../screens/Home/Room";
+import ProfileSetup from "../screens/ProfileSetupScreen";
 
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
@@ -41,6 +42,7 @@ function RootNavigator() {
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="Room" component={Room} />
+      <Stack.Screen name="ProfileSetup" component={ProfileSetup} />
 
       <Stack.Screen
         name="NotFound"

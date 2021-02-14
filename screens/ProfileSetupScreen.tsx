@@ -5,6 +5,10 @@ import { Text, View } from "../components/Themed";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import { theme } from "../theme";
+import { firebase } from "@react-native-firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AsyncStoreKey } from "../types/AsyncStore";
+import { StoreUser, useStoreActions, useStoreState } from "../store/types";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -18,6 +22,29 @@ type Props = {
 export default function ProfileSetup({ navigation }: Props) {
   const [displayName, setDisplayName] = React.useState("");
   const [userName, setUserName] = React.useState("");
+  const setUser = useStoreActions(actions => actions.setUser);
+  const reduxUser = useStoreState(state => state.user);
+
+  const onSetupProfile = async () => {
+    if (reduxUser) {
+      try {
+        const { user } = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(reduxUser.email, reduxUser.password);
+
+        await AsyncStorage.setItem(
+          AsyncStoreKey.CURRENT_USER,
+          JSON.stringify(user)
+        );
+        setUser(user as StoreUser);
+        navigation.navigate("Root");
+      } catch (error) {
+        // setErrorMsg(error.message);
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profile Setup</Text>
@@ -41,7 +68,7 @@ export default function ProfileSetup({ navigation }: Props) {
         mode="contained"
         style={styles.button}
         color="black"
-        onPress={() => navigation.navigate("Root")}
+        onPress={onSetupProfile}
         accessibilityComponentType=""
         accessibilityTraits=""
       >
@@ -75,6 +102,5 @@ const styles = StyleSheet.create({
   button: {
     width: "40%",
     marginTop: "5%",
-    marginLeft: "20%",
   },
 });
