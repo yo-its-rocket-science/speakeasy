@@ -9,7 +9,6 @@ type ProfileScreenNavigationProp = StackNavigationProp<
   'Login'
   >;
 
-
 type Props = {
   navigation: ProfileScreenNavigationProp;
 };

@@ -10,8 +10,8 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SpeakEasy</Text>
-      <TextInput label="Email" style={styles.field} value={email} onChangeText={text => setEmail(text)} accessibilityComponentType="" accessibilityTraits="" textContentType="emailAddress"/>
-      <TextInput label="Password" style={styles.field} value={password} onChangeText={text => setPassword(text)} accessibilityComponentType="" accessibilityTraits="" secureTextEntry={true} textContentType="password"/>
+      <TextInput label="Email" style={styles.field} value={email} onChangeText={text => setEmail(text)} accessibilityComponentType="" accessibilityTraits="" textContentType="emailAddress" autoCompleteType="email" keyboardType="email-address"/>
+      <TextInput label="Password" style={styles.field} value={password} onChangeText={text => setPassword(text)} accessibilityComponentType="" accessibilityTraits="" secureTextEntry={true} textContentType="password" autoCompleteType="password"/>
       <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()} accessibilityComponentType="" accessibilityTraits="">Sign up</Button>
     </View>
   );
