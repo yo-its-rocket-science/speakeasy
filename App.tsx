@@ -1,13 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider as PaperProvider, DefaultTheme } from "react-native-paper";
-import { Theme } from "react-native-paper/lib/typescript/types";
-
+import merge from "deepmerge";
 import useCachedResources from "./hooks/useCachedResources";
 import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { theme } from "./theme";
+import { DarkTheme as PaperDarkTheme, Provider as PaperProvider } from "react-native-paper";
+import { DarkTheme as NavigationDarkTheme } from "@react-navigation/native";
+
+const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
+
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -17,7 +18,7 @@ export default function App() {
     return null;
   } else {
     return (
-      <PaperProvider theme={theme}>
+      <PaperProvider theme={CombinedDarkTheme}>
         <SafeAreaProvider>
           <Navigation colorScheme={colorScheme} />
         </SafeAreaProvider>
