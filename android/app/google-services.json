@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "705209892042",
+    "firebase_url": "https://driven-origin-304722-default-rtdb.firebaseio.com",
+    "project_id": "driven-origin-304722",
+    "storage_bucket": "driven-origin-304722.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705209892042:android:ae708d7c8f8155ddd5c833",
+        "android_client_info": {
+          "package_name": "com.rocketscience.speakeasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705209892042-b8q7dhusmaespnbpn20g10n24p16kpl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rocketscience.speakeasy",
+            "certificate_hash": "8f10671b4b25ca8efef8c3ed17ab925502ade591"
+          }
+        },
+        {
+          "client_id": "705209892042-upl965apq3sihtcqbs9s7qvkccsgjn2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPDz36UJ1TXQKCq0t9k5iFr5hF_cTPWV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705209892042-upl965apq3sihtcqbs9s7qvkccsgjn2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
