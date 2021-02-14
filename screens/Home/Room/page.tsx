@@ -14,10 +14,22 @@ import { RoomPageProps } from "./types";
 import { Room as RoomModel } from "../../../types";
 import { User, UserMockFactory } from "../../../types/User";
 import { RTCPeerConnection, RTCView, mediaDevices } from "react-native-webrtc";
+import { RoomContextWrapper, useRoomContext } from "./context";
 
 const DATA: User[] = UserMockFactory.buildList(15);
 
 const RoomHeader = ({ room }: { room: RoomModel }) => {
+  const {
+    localStream,
+    setLocalStream,
+    remoteStream,
+    cachedLocalPC,
+    cachedRemotePC,
+    setRemoteStream,
+    setCachedLocalPC,
+    setCachedRemotePC,
+  } = useRoomContext();
+
   const navigation = useNavigation();
 
   const onEndCall = () => {
@@ -25,18 +37,18 @@ const RoomHeader = ({ room }: { room: RoomModel }) => {
       navigation.goBack();
     }
 
-    // if (cachedLocalPC) {
-    //   cachedLocalPC.removeStream(localStream);
-    //   cachedLocalPC.close();
-    // }
-    // if (cachedRemotePC) {
-    //   cachedRemotePC.removeStream(remoteStream);
-    //   cachedRemotePC.close();
-    // }
-    // setLocalStream();
-    // setRemoteStream();
-    // setCachedRemotePC();
-    // setCachedLocalPC();
+    if (cachedLocalPC) {
+      cachedLocalPC.removeStream(localStream);
+      cachedLocalPC.close();
+    }
+    if (cachedRemotePC) {
+      cachedRemotePC.removeStream(remoteStream);
+      cachedRemotePC.close();
+    }
+    setLocalStream();
+    setRemoteStream();
+    setCachedRemotePC();
+    setCachedLocalPC();
   };
 
   return (
@@ -90,29 +102,28 @@ const Item = (item: User) => {
   );
 };
 
-const RoomFooter = ({
-  room,
-  localStream,
-}: {
-  room: RoomModel;
-  localStream: MediaStream | null;
-}) => {
+const RoomFooter = ({ room }: { room: RoomModel }) => {
   const [muted, setMuted] = useState(true);
-  const [remoteStream, setRemoteStream] = useState<MediaStream>();
-  const [cachedLocalPC, setCachedLocalPC] = useState<RTCPeerConnection>();
-  const [cachedRemotePC, setCachedRemotePC] = useState<RTCPeerConnection>();
+  const {
+    localStream,
+    remoteStream,
+    setRemoteStream,
+    setCachedLocalPC,
+    setCachedRemotePC,
+  } = useRoomContext();
 
   useEffect(() => {
     if (localStream) {
+      // mute by default
       localStream?.getAudioTracks().forEach(t => {
         t.enabled = false;
       });
 
+      // start the call
       startCall();
     }
   }, [localStream]);
 
-  // Mutes the local's outgoing audio
   const toggleMute = () => {
     // TODO: remote stream
     // if (!remoteStream) return;
@@ -202,7 +213,7 @@ const RoomFooter = ({
 };
 
 export const Room = () => {
-  const [localStream, setLocalStream] = useState<MediaStream | null>(null);
+  const { setLocalStream } = useRoomContext();
 
   const route = useRoute();
   const { room } = route?.params as RoomPageProps;
@@ -214,6 +225,8 @@ export const Room = () => {
   const startLocalStream = async () => {
     try {
       const newStream = await mediaDevices.getUserMedia({ audio: true });
+      console.log(setLocalStream);
+
       setLocalStream((newStream as unknown) as MediaStream);
     } catch (err) {
       console.error(err);
@@ -244,7 +257,7 @@ export const Room = () => {
         />
       </View>
       <View style={{ flex: 0.1 }}>
-        <RoomFooter room={room} localStream={localStream} />
+        <RoomFooter room={room} />
       </View>
     </SafeAreaView>
   );
