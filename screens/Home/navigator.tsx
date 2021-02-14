@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "./";
+import { Home } from "./page";
 import { HomeScreenParamList } from "../../types";
 import { MaterialIcons } from "@expo/vector-icons";
 
