@@ -20,6 +20,7 @@ export default function App() {
       <PaperProvider theme={theme}>
         <SafeAreaProvider>
           <Navigation colorScheme={colorScheme} />
+          <StatusBar style="auto" backgroundColor={theme.colors.background} />
         </SafeAreaProvider>
       </PaperProvider>
     );
