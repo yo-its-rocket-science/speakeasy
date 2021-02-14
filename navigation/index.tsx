@@ -1,28 +1,25 @@
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { DarkTheme as PaperDarkTheme } from "react-native-paper";
+import merge from "deepmerge";
+
+import { DarkTheme as NavigationDarkTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
 
-import NotFoundScreen from '../screens/NotFoundScreen';
-import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
-import LinkingConfiguration from './LinkingConfiguration';
+import NotFoundScreen from "../screens/NotFoundScreen";
+import { RootStackParamList } from "../types";
+import BottomTabNavigator from "./BottomTabNavigator";
+import LinkingConfiguration from "./LinkingConfiguration";
 import LandingScreen from "../screens/LandingScreen";
 import LoginScreen from "../screens/LoginScreen";
 
+const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
+
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+//{colorScheme,}: {colorScheme: ColorSchemeName;}
+export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={DarkTheme}>
+    <NavigationContainer linking={LinkingConfiguration} theme={CombinedDarkTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
