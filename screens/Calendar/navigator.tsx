@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Calendar } from "./index";
+import { Calendar } from "./";
 import { CalendarScreenParamList } from "../../types";
 
 const CalendarStack = createStackNavigator<CalendarScreenParamList>();
