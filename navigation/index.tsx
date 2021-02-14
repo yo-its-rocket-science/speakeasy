@@ -1,14 +1,16 @@
 import { DarkTheme as PaperDarkTheme } from "react-native-paper";
 import merge from "deepmerge";
 
-import { DarkTheme as NavigationDarkTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DarkTheme as NavigationDarkTheme,
+  NavigationContainer,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
-import LinkingConfiguration from "./LinkingConfiguration";
 import LandingScreen from "../screens/LandingScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SignUpScreen from "../screens/SignUpScreen";
@@ -20,7 +22,7 @@ const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 //{colorScheme,}: {colorScheme: ColorSchemeName;}
 export default function Navigation() {
   return (
-    <NavigationContainer linking={LinkingConfiguration} theme={CombinedDarkTheme}>
+    <NavigationContainer theme={CombinedDarkTheme}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -33,10 +35,11 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Landing" component={LandingScreen} />
+      {/* <Stack.Screen name="Landing" component={LandingScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignUpScreen} />
+      <Stack.Screen name="SignIn" component={SignUpScreen} /> */}
       <Stack.Screen name="Root" component={BottomTabNavigator} />
+
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

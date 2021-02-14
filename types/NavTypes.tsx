@@ -13,8 +13,13 @@ export type BottomTabParamList = {
 
 export type HomeScreenParamList = {
   HomeScreen: undefined;
+  RoomScreen: undefined;
 };
 
 export type CalendarScreenParamList = {
   CalendarScreen: undefined;
+};
+
+export type RoomScreenParamList = {
+  RoomScreen: undefined;
 };

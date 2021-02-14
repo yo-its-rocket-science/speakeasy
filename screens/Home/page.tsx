@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { FlatList, Image, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -17,39 +19,50 @@ import {
 } from "react-native-safe-area-context";
 import { View } from "../../components/Themed";
 import { theme } from "../../theme";
-import { Room, RoomMockFactory } from "../../types";
+import { HomeScreenParamList, Room, RoomMockFactory } from "../../types";
 import { styles } from "./style";
 
 const DATA: Room[] = RoomMockFactory.buildList(10);
 
-const Item = (item: Room) => (
-  <Card
-    accessibilityComponentType=""
-    accessibilityTraits=""
-    style={styles.card}
-  >
-    <Card.Content>
-      <View
-        style={{
-          backgroundColor: "#1C1C1C",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: "auto",
-        }}
-      >
-        <Title>{item.name}</Title>
-        <Chip
-          accessibilityComponentType=""
-          accessibilityTraits=""
-          style={{ backgroundColor: "#ef5350" }}
+const Item = (item: Room) => {
+  const navigation = useNavigation();
+
+  const onOpenRoom = () => {
+    console.log({ item });
+
+    navigation.navigate("RoomScreen", { room: item });
+  };
+
+  return (
+    <Card
+      accessibilityComponentType=""
+      accessibilityTraits=""
+      style={styles.card}
+      onPress={onOpenRoom}
+    >
+      <Card.Content>
+        <View
+          style={{
+            backgroundColor: "#1C1C1C",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "auto",
+          }}
         >
-          Live
-        </Chip>
-      </View>
-      <Paragraph>{item.description}</Paragraph>
-    </Card.Content>
-  </Card>
-);
+          <Title>{item.name}</Title>
+          <Chip
+            accessibilityComponentType=""
+            accessibilityTraits=""
+            style={{ backgroundColor: "#ef5350" }}
+          >
+            Live
+          </Chip>
+        </View>
+        <Paragraph>{item.description}</Paragraph>
+      </Card.Content>
+    </Card>
+  );
+};
 
 const HomeHeader = () => (
   <Appbar
