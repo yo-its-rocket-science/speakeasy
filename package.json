@@ -29,6 +29,8 @@
     "expo-status-bar": "~1.0.3",
     "expo-updates": "~0.4.0",
     "expo-web-browser": "~8.6.0",
+    "factory.ts": "^0.5.1",
+    "faker": "^5.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@types/faker": "^5.1.6",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "babel-jest": "~25.2.6",

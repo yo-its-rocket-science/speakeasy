@@ -6,7 +6,7 @@ import { CalendarScreenParamList } from "../../types";
 const CalendarStack = createStackNavigator<CalendarScreenParamList>();
 export const CalendarNavigator = () => {
   return (
-    <CalendarStack.Navigator>
+    <CalendarStack.Navigator screenOptions={{ headerShown: false }}>
       <CalendarStack.Screen
         name="CalendarScreen"
         component={Calendar}
