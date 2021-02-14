@@ -5,6 +5,7 @@ import { Text, View } from "../components/Themed";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import { theme } from "../theme";
+import { firebase } from "@react-native-firebase/auth";
 
 type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, "Root">;
 
@@ -16,13 +17,33 @@ export default function SignUpScreen({ navigation }: Props) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [repeat, setRepeat] = React.useState("");
+    const [errorMessage, setErrorMsg] = React.useState("");
+
+    function AttemptCreateAccount() {
+        if (email.length === 0 || password.length === 0 || repeat.length === 0) {
+            setErrorMsg("Enter your email and password to login.");
+        } else if (password != repeat) {
+            setErrorMsg("Passwords do not match");
+        } else {
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then((userCrendential) => {
+                  navigation.navigate("Root");
+              }).catch((error) => {
+                setErrorMsg(error.message);
+            });
+        }
+    }
+
     return (
       <View style={styles.container}>
           <Text style={styles.title}>Create Account</Text>
+          <Text>{errorMessage}</Text>
           <TextInput style={styles.field}
                      label="Email"
                      value={email}
-                     onChangeText={text => setEmail(text)}
+                     onChangeText={(text: string) => setEmail(text)}
                      accessibilityComponentType=""
                      accessibilityTraits=""
                      textContentType="emailAddress"
@@ -31,7 +52,7 @@ export default function SignUpScreen({ navigation }: Props) {
           <TextInput style={styles.field}
                      label="Password"
                      value={password}
-                     onChangeText={text => setPassword(text)}
+                     onChangeText={(text: string) => setPassword(text)}
                      accessibilityComponentType=""
                      accessibilityTraits=""
                      secureTextEntry={true}
@@ -40,13 +61,13 @@ export default function SignUpScreen({ navigation }: Props) {
           <TextInput style={styles.field}
                      label="Repeat Password"
                      value={repeat}
-                     onChangeText={text => setRepeat(text)}
+                     onChangeText={(text: string) => setRepeat(text)}
                      accessibilityComponentType=""
                      accessibilityTraits=""
                      secureTextEntry={true}
                      textContentType="password"
                      autoCompleteType="password" />
-          <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate("Root")}
+          <Button mode="contained" style={styles.button} color="black" onPress={AttemptCreateAccount}
                   accessibilityComponentType="" accessibilityTraits="">Sign up</Button>
       </View>
     );

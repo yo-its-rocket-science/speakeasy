@@ -7,7 +7,7 @@ import { RootStackParamList } from "../types";
 import { theme } from "../theme";
 
 type Login = StackNavigationProp<RootStackParamList, "Login">;
-type Signup = StackNavigationProp<RootStackParamList, "Signup">;
+type Signup = StackNavigationProp<RootStackParamList, "SignUp">;
 
 type Props = {
   navigation: Login | Signup;
