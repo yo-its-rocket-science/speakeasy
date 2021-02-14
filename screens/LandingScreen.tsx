@@ -4,6 +4,7 @@ import { Button } from 'react-native-paper';
 import { Text, View } from '../components/Themed';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from "../types";
+import { theme } from "../theme";
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Login'
@@ -20,7 +21,7 @@ export default function LandingScreen({navigation}: Props) {
       <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate('Login')}
               accessibilityComponentType=""
               accessibilityTraits="">Log in</Button>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate('Login')}
+      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate('NotFound')}
               accessibilityComponentType=""
               accessibilityTraits="">Sign up</Button>
     </View>
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
     marginTop: '5%',
   },
   container: {
+    backgroundColor: theme.colors.background,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
