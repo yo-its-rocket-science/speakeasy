@@ -3,14 +3,12 @@ import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Text, View } from '../components/Themed';
 
-export default function LandingScreen({navigation}) {
+export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>SpeakEasy</Text>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate('Login')}
-              accessibilityComponentType=""
-              accessibilityTraits="">Log in</Button>
-      <Button mode="contained" style={styles.button} color="black" onPress={() => navigation.navigate('SignUp')}
+
+      <Button mode="contained" style={styles.button} color="black" onPress={() => console.log()}
               accessibilityComponentType=""
               accessibilityTraits="">Sign up</Button>
     </View>
