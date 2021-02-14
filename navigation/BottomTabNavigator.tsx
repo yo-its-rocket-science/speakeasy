@@ -1,10 +1,9 @@
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 
 import useColorScheme from "../hooks/useColorScheme";
-import { Home, Calendar, HomeNavigator, CalendarNavigator } from "../screens";
+import { HomeNavigator, CalendarNavigator } from "../screens";
 import { BottomTabParamList } from "../types";
 
 const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
